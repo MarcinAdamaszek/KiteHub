@@ -1,0 +1,50 @@
+1. Spot
+	- int id 
+    - User creator 
+	- name 
+	- description
+    - skill
+    - reviews
+    - rates 
+	- dateCreated 
+    - jan 
+    - feb 
+    - ...etc
+
+2. User
+    - Id
+    - UserName
+    - password
+    - email
+    - spots
+    - reviews
+    - rates
+    - dateCreated
+
+3. Review
+	- id 
+	- content
+    - user
+    - spot
+    - dateCreated
+
+4. Rate
+	- id 
+	- value
+    - user
+    - spot
+    - dateCreated
+
+5. Image
+    - id (integer, PRIMARY KEY)
+    - spot_id (integer, FOREIGN KEY)
+    - filename (varchar(50), NOT NULL)
+    - url (varchar(100), NOT NULL)
+
+6. user_settings
+    - id (integer, PRIMARY KEY)
+    - user_id (integer, FOREIGN KEY)
+    - remember_me (bit, NOT NULL)
+    - new_spot_notify (bit, NOT NULL)
+    - spot_rated_notify (bit, NOT NULL)
+    - spot_reviewed_notify (bit, NOT NULL)

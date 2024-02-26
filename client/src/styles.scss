@@ -1,0 +1,22 @@
+@font-face {
+    font-family: "LuckiestGuy";
+    src: url(assets/fonts/LuckiestGuy-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url(assets/fonts/Inter/Inter-Medium.ttf);
+}
+
+.darkest-gray {
+    background-color: #383838;
+}
+
+body {
+    background-color: grey;
+}@import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '@fortawesome/fontawesome-free/scss/solid.scss';
+@import '@fortawesome/fontawesome-free/scss/regular.scss';
+@import '@fortawesome/fontawesome-free/scss/brands.scss';
+ 
+@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';

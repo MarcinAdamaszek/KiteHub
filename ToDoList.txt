@@ -1,0 +1,2 @@
+- github
+- zamienić "TrustServerCertificate=True" na prawdziwy certyfikat przed deploymentem
