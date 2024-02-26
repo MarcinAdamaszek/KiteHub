@@ -5,15 +5,15 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './_modules/shared/shared.module';
-import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { SpotListComponent } from './spot-list/spot-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    HomeComponent,
-    AboutComponent
+    AboutComponent,
+    SpotListComponent,
   ],
   imports: [
     BrowserModule,
