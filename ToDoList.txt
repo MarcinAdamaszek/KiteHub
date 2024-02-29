@@ -1,2 +1,6 @@
 - github
+- zmienić metodą filterbymonth na array stringów z miesiącami aby w razie czego rzucić wyjątkiem
+
+Na koniec:
 - zamienić "TrustServerCertificate=True" na prawdziwy certyfikat przed deploymentem
+

@@ -4,7 +4,7 @@ public class Spot
 {
     public int Id { get; set; }
     public string SpotName { get; set; } = "Unnamed Spot";
-    public int Description { get; set; }
+    public string Description { get; set; } = string.Empty;
     public DateTime DateCreated { get; set; }
     public bool IsBeginner { get; set; }
     public bool IsIntermediate { get; set; }
