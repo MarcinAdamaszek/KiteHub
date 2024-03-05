@@ -1,5 +1,6 @@
 ﻿using API.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Identity.Client;
 
 namespace API.Data;
@@ -11,4 +12,5 @@ public class DataContext : DbContext
             
     }
     public DbSet<Spot> Spots { get; set; }
+    
 }

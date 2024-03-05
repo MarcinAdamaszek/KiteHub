@@ -1,6 +1,9 @@
-- github
-- zmienić metodą filterbymonth na array stringów z miesiącami aby w razie czego rzucić wyjątkiem
+- github\
 
 Na koniec:
 - zamienić "TrustServerCertificate=True" na prawdziwy certyfikat przed deploymentem
+
+Po wszystkim:
+- refactor kalendarza na 1 łuskę repeat 12
+- zrobić powiększanie i animacje kalendarza
 

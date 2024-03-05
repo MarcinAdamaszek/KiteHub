@@ -1,0 +1,31 @@
+
+
+.husk-box {
+    display: inline-block;
+    margin: 0 0.07%;
+    font-family: "Inter";
+}
+
+.month-husk {
+    background-color: #383838;
+    color: white;
+}
+
+.month-husk:hover {
+    background-color: #383838;
+    color: #FDC900;
+    cursor: pointer;
+}
+
+.husk-content {
+    margin: 0.5em 0.4em 0.6em 0.4em;
+}
+
+p {
+    width: 2.3em;
+    margin: auto;
+}
+
+.selected div div p {
+    color: #FDC900;
+}

@@ -1,0 +1,31 @@
+h6 {
+    font-family: "Inter";
+    font-weight: bold;
+    line-height: 85%;
+}
+
+.beginner > p, .advanced > p {
+    display: inline;
+    font-family: "Inter";
+}
+
+.beginner, .advanced {
+    background-color: #E4E4E4;
+    border-radius: 25px;
+    padding: 6px;
+}
+
+.title-box {
+    margin-top: 40%;
+    text-align: center;
+    background-color: rgba(247, 247, 247, 0.5);
+}
+
+.title-box h2 {
+    font-family: "LuckiestGuy";
+}
+
+.card-header {
+    background-color: #383838;
+    color: white;
+}

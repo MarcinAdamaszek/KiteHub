@@ -1,6 +1,7 @@
 using API;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,13 +12,24 @@ builder.Services.AddControllers();
 // builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+        options.ConfigureWarnings(warnings =>
+        warnings.Ignore(CoreEventId.NavigationBaseIncludeIgnored));
+    });
+
 
 builder.Services.AddScoped<ISpotRepository, SpotRepository>();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+
+app.UseCors(builder => builder.AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("https://localhost:4200"));
 
 app.UseAuthorization();
 

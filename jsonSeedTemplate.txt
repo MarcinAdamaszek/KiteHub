@@ -1,7 +1,6 @@
 [
   '{{repeat(10)}}',
   {
-  "id": '{{index(0)}}',
   "spotName": '{{country()}}',
   "description": '{{lorem(100, "words")}}',
   "dateCreated": '{{date(new Date(2020, 4, 1), new Date(2020,5,30), "YYYY-MM-dd")}}',

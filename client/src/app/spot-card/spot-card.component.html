@@ -1,0 +1,51 @@
+        
+            <div class="card active" style="min-width: 400px;">
+                <img src="../../assets/images/KiteSpotSmall.jpg" class="card-img-top" alt="..." style="width:100%">
+                <div class="card-img-overlay" style="padding: 0;">
+                    <div class="title-box">
+                        <h2 class="card-title align-middle">{{spot?.spotName}}</h2>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h3>Rating will go here</h3>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row mb-4">
+                            <app-calendar-small [spot]="spot"></app-calendar-small>
+                        </div>
+                        <div class="row justify-content-evenly">
+                            <div class="col-6 mb-5">
+                                <div class="mb-2">
+                                    <i class="fa-solid fa-map-location-dot fa-2xl" style="color: #383838;"></i>
+                                </div>
+                                <h6>Cape Town</h6>
+                                <h6>RPA</h6>
+                                <h6>Africa</h6>
+                            </div>
+                            <div class="col-6 mb-5 text-start">
+                                <div class="advanced mb-3" style="width: 9em;"
+                                    *ngIf="spot?.isAdvanced">
+                                    <img src="../../assets/icons/high-risk-icon.svg" alt="" 
+                                        style="width: 20px;"
+                                        class="ms-2 me-2">
+                                    <p>Advanced</p>
+                                </div>
+                                <div class="beginner" style="width: 8.5em;"
+                                    *ngIf="spot?.isBeginner">
+                                        <img src="../../assets/icons/low-risk-icon.svg" alt="" 
+                                            style="width: 20px;"
+                                            class="ms-2 me-2">
+                                        <p>Beginner</p>
+                                </div>
+                            </div>
+                            <p class="card-text">{{TruncateDescription(spot.description)}}</p>
+                        </div>
+                        <div class="row">
+
+                        </div>
+                    </div>
+                 
+                </div>
+            </div>
+        
