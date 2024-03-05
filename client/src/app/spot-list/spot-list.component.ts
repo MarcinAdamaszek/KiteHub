@@ -19,11 +19,12 @@ export class SpotListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadSpots();
+    this.loadSpots('none');
   }
 
-  loadSpots() {
+  loadSpots(selectedMonth: string) {
     if (this.spotParams) {
+      this.spotParams.selectedMonth = selectedMonth;
       this.spotsService.getSpots(this.spotParams).subscribe({
         next: response => {
           if (response.result && response.pagination) {
@@ -39,7 +40,7 @@ export class SpotListComponent implements OnInit {
     if (this.spotParams && this.spotParams?.pageNumber !== event.page) {
       this.spotParams.pageNumber = event.page;
       this.spotsService.setSpotParams(this.spotParams);
-      this.loadSpots();
+      this.loadSpots(this.spotParams.selectedMonth);
     }
   }
 

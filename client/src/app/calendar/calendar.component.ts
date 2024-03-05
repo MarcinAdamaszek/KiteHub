@@ -1,25 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
+
 export class CalendarComponent implements OnInit {
-  selectedMonth: string = '';
+  selectedMonth: string = 'none';
+  @Output() newMonthSelected = new EventEmitter<string>();
 
   ngOnInit(): void {
-    
   }
 
-  toggleSelectedOn(month: string) {
+  toggleSelected(month: string) {
+
+    let newSelectedMonth: string;
 
     if (this.selectedMonth === month) {
-      this.selectedMonth = '';
+      newSelectedMonth = 'none';
     }
     else {
-      this.selectedMonth = month;
+      newSelectedMonth = month;
     }
+
+    this.selectedMonth = newSelectedMonth;
+    this.newMonthSelected.emit(newSelectedMonth);
   }
   
 }
