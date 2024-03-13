@@ -1,7 +1,10 @@
 using API;
 using API.Data;
+using API.Entities;
+using API.Extensions;
+using API.Middleware;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,18 +14,23 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddDbContext<DataContext>(options =>
-    {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-        options.ConfigureWarnings(warnings =>
-        warnings.Ignore(CoreEventId.NavigationBaseIncludeIgnored));
-    });
+// builder.Services.AddDbContext<DataContext>(options =>
+//     {
+//         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+//         options.ConfigureWarnings(warnings =>
+//         warnings.Ignore(CoreEventId.NavigationBaseIncludeIgnored));
+//     });
 
 
-builder.Services.AddScoped<ISpotRepository, SpotRepository>();
-builder.Services.AddCors();
+// builder.Services.AddScoped<ISpotRepository, SpotRepository>();
+// builder.Services.AddCors();
+
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
@@ -31,6 +39,7 @@ app.UseCors(builder => builder.AllowAnyHeader()
     .AllowCredentials()
     .WithOrigins("https://localhost:4200"));
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -41,8 +50,11 @@ var services = scope.ServiceProvider;
 try 
 {
     var context = services.GetRequiredService<DataContext>();
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     var uow = new UnitOfWork(context);
     await context.Database.MigrateAsync();
+    await Seed.SeedUsers(userManager, roleManager);
     await Seed.SeedSpots(uow, context);
 }
 catch (Exception ex) 

@@ -7,11 +7,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './_modules/shared/shared.module';
 import { AboutComponent } from './about/about.component';
 import { SpotListComponent } from './spot-list/spot-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SpotCardComponent } from './spot-card/spot-card.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarSmallComponent } from './calendar-small/calendar-small.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginModalComponent } from './modals/login-modal/login-modal.component';
+import { RegisterModalComponent } from './modals/register-modal/register-modal.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +31,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SpotCardComponent,
     CalendarComponent,
     CalendarSmallComponent,
+    LoginModalComponent,
+    RegisterModalComponent,
+    TextInputComponent,
+    ServerErrorComponent,
+    NotFoundComponent,
+    HasRoleDirective,
   ],
   imports: [
     BrowserModule,
@@ -29,9 +44,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
