@@ -5,16 +5,6 @@
     </button>
 </div>
 <div class="modal-body">
-    <!-- <form #loginForm="ngForm" class="d-flex flex-column" (ngSubmit)="login()" autocomplete="off">
-        <input name="username" [(ngModel)]="model.username" class="form-control me-2 mb-4" type="text"
-            placeholder="Username">
-        <input name="password" [(ngModel)]="model.password" class="form-control me-2 mb-4" type="password"
-            placeholder="Password">
-        <div class="text-center mt-4 mb-2">
-            <button class="btn btn-lg btn-warning me-2" type="submit">Sign in</button>
-            <button type="button" class="btn btn-lg btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
-        </div>
-    </form> -->
     <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && login()" autocomplete="off">
         <app-text-input [formControl]="$any(loginForm.controls['username'])" [label]="'username'">
         </app-text-input>

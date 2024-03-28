@@ -1,0 +1,57 @@
+        
+            <a routerLink="/spots/{{spot.id}}">
+            <div class="card active" style="min-width: 400px;">
+                <div class="title-box"> 
+                    <h2 class="card-title align-middle">{{spot.spotName}}</h2>
+                    </div>
+                <div class="card-header mb-2">
+                    <app-rating-stars [rating]="spot.rating"></app-rating-stars>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row mb-4">
+                            <app-calendar-small [spot]="spot"></app-calendar-small>
+                        </div>
+                        <div class="row justify-content-evenly">
+                            <div class="col-6 mb-5">
+                                <div class="mb-2">
+                                    <i class="fa-solid fa-map-location-dot fa-2xl" style="color: #383838;"></i>
+                                </div>
+                                <h5>Cape Town</h5>
+                                <h5>RPA</h5>
+                                <h5>Africa</h5>
+                            </div>
+                            <div class="col-6 mb-4 mt-1 text-start">
+                                <div class="skill-level mb-3" style="width: 140px;"
+                                    *ngIf="spot?.isAdvanced">
+                                    <img src="../../assets/icons/high-risk-icon.svg" alt="" 
+                                        style="width: 20px;"
+                                        class="ms-2 me-2">
+                                    <p>Advanced</p>
+                                </div>
+                                <div class="skill-level" style="width: 130px;"
+                                    *ngIf="spot?.isBeginner">
+                                        <img src="../../assets/icons/low-risk-icon.svg" alt="" 
+                                            style="width: 20px;"
+                                            class="ms-2 me-2">
+                                        <p>Beginner</p>
+                                </div>
+                            </div>
+                            <p class="card-text">{{TruncateDescription(spot.description)}}</p>
+                        </div>
+                        <hr style="border-top: 2px solid #383838;">
+                        <div class="row mt-4 ms-4">
+                            <div class="col-6 d-flex align-middle">
+                                <img src="../../assets/icons/star-grey.svg" alt="" style="width: 20px;" class="ms-2 me-2">
+                                <h6 style="margin-top: 11px;">{{spot.ratesCount}} Rates</h6>
+                            </div>
+                            <div class="col-6 d-flex align-middle">
+                                <img src="../../assets/icons/speech-bubble-grey.svg" alt="" style="width: 20px;" class="ms-2 me-2">
+                                <h6 style="margin-top: 11px;">{{spot.reviewsCount}} Reviews</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+        

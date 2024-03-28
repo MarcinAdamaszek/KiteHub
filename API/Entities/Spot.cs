@@ -5,9 +5,16 @@ public class Spot
     public int Id { get; set; }
     public string SpotName { get; set; } = "Unnamed Spot";
     public string Description { get; set; } = string.Empty;
-    public DateTime DateCreated { get; set; }
+    public int? CreatorId { get; set; }
+    public string CreatorName { get; set; }  = string.Empty;
+    public AppUser Creator { get; set; }
+    public List<Rate> Rates { get; set; } = new();
+    public List<Review> Reviews { get; set; } = new();
+    public double Rating { get; set; } = 0;
+    public int RatesCount { get; set; } = 0;
+    public int ReviewsCount { get; set; } = 0;
+    public DateTime DateCreated { get; set; } = DateTime.UtcNow;
     public bool IsBeginner { get; set; }
-    public bool IsIntermediate { get; set; }
     public bool IsAdvanced { get; set; }
     public bool January { get; set; }
     public bool February { get; set; }

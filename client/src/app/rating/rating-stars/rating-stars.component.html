@@ -1,0 +1,5 @@
+<div class="stars-container d-flex justify-content-center p-2">
+    <img *appRepeat="fullStarsValue" src="../../assets/icons/star-icon.svg" alt="*">
+    <img *ngIf="displayHalfStar" src="../../assets/icons/star-half-final.svg" alt="*">
+    <img *appRepeat="outlineStarsValue" src="../../assets/icons/star-line-yellow-icon.svg" alt="*">
+</div>

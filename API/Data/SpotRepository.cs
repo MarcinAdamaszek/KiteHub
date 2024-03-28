@@ -1,18 +1,22 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using API.Data;
+﻿using API.DTOs;
 using API.Entities;
 using API.Helpers;
+using API.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace API;
+namespace API.Data;
 
 public class SpotRepository : ISpotRepository
 {
     private readonly DataContext _context;
+    private readonly IMapper _mapper;
 
-    public SpotRepository(DataContext context)
+    public SpotRepository(DataContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     public void AddSpot(Spot spot)
@@ -20,18 +24,33 @@ public class SpotRepository : ISpotRepository
         _context.Spots.Add(spot);
     }
     
-    public async Task<PagedList<Spot>> GetSpotsAsync(SpotParams spotParams)
+    public async Task<PagedList<SpotDto>> GetSpotsAsync(SpotParams spotParams)
     {
         var query = _context.Spots.AsQueryable();
 
         query = FilterByMonth(query, spotParams.SelectedMonth);
 
-        return await PagedList<Spot>.CreateAsync(query.AsNoTracking(), spotParams.PageNumber,
+        return await PagedList<SpotDto>.CreateAsync(query.AsNoTracking()
+            .ProjectTo<SpotDto>(_mapper.ConfigurationProvider), spotParams.PageNumber,
             spotParams.PageSize);
     }
-    public async Task<Spot> GetSpotBySpotNameAsync()
+    public async Task<Spot> GetSpotAsync(int spotId)
     {
-        throw new NotImplementedException();
+        return await _context.Spots
+            .Where(s => s.Id == spotId)
+            .SingleOrDefaultAsync();
+    }
+
+    public async Task<SpotDto> GetSpotDtoAsync(int spotId)
+    {
+        return await _context.Spots
+            .Where(s => s.Id == spotId)
+            .ProjectTo<SpotDto>(_mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync();
+    }
+    public void UpdateSpot(Spot spot)
+    {
+        _context.Entry(spot).State = EntityState.Modified;
     }
 
     private IQueryable<Spot> FilterByMonth(IQueryable<Spot> query, string month)

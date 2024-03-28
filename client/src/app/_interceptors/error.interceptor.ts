@@ -18,7 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error) {
+        if (error) { 
           switch (error.status) {
             case 400:
               if (error.error.errors) {
@@ -31,7 +31,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 throw modelStateErrors.flat();
               }
               else {
-                this.toastr.error(error.error.title, error.status.toString());
+                this.toastr.error(error.error);
               }
               break;
             case 401:

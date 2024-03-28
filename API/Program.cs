@@ -3,6 +3,7 @@ using API.Data;
 using API.Entities;
 using API.Extensions;
 using API.Middleware;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,7 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
+
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
@@ -50,9 +52,10 @@ var services = scope.ServiceProvider;
 try 
 {
     var context = services.GetRequiredService<DataContext>();
+    var mapper = services.GetRequiredService<IMapper>();
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
-    var uow = new UnitOfWork(context);
+    var uow = new UnitOfWork(context, mapper);
     await context.Database.MigrateAsync();
     await Seed.SeedUsers(userManager, roleManager);
     await Seed.SeedSpots(uow, context);

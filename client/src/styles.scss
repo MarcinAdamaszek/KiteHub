@@ -16,6 +16,10 @@ body {
     font-family: "Inter";
 }
 
+.toast-container {
+    position: fixed !important;
+}
+
 @import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
 @import '@fortawesome/fontawesome-free/scss/solid.scss';
 @import '@fortawesome/fontawesome-free/scss/regular.scss';
@@ -25,3 +29,4 @@ body {
 
 /* Importing Bootstrap SCSS file. */
 @import "./node_modules/bootstrap/scss/bootstrap";
+

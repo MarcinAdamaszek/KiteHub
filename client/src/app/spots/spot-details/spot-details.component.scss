@@ -1,0 +1,77 @@
+h1 {
+    font-family: "LuckiestGuy";
+}
+
+.name-box {
+    font-family: "LuckiestGuy";
+    background-color: lightblue;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.rating-box {
+    background-color: #383838;
+    width: 440px;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 0 2px 2px 0;
+}
+
+.review-post-box {
+    position: relative;
+}
+
+.rating-text {
+    font-family: "LuckiestGuy";
+    color: white;
+    letter-spacing: 0.06em;
+    padding: 12px 0 0 8px;
+}
+
+.rating-number {
+    font-family: "LuckiestGuy";
+    color: #FDC900;
+    letter-spacing: 0.06em;
+    padding: 12px 0 0 10px;
+}
+
+.rating-button-text {
+    font-family: "LuckiestGuy";
+    letter-spacing: 0.06em;
+    padding: 10px 0 0 4px;
+}
+
+.description {
+    font-family: "Inter";
+    padding-right: 20px;
+    font-size: 1em;
+    color: black;
+}
+
+.skill-level > p {
+    display: inline;
+    font-family: "Inter";
+}
+
+.skill-level {
+    background-color: #E4E4E4;
+    border-radius: 25px;
+    padding: 6px;
+}
+
+textarea {
+    background-color: rgb(255, 252, 243);
+    border-radius: 5px;
+}
+
+textarea:focus {
+    background-color: rgb(255, 252, 243);
+}
+
+label {
+    font-family: "Inter";
+}
+
+:host ::ng-deep app-calendar-small p{
+    font-size: 0.79rem;
+  }

@@ -1,0 +1,26 @@
+.husk-box {
+    margin: 0 0.2px;
+    display: inline-block;
+    font-family: "Inter";
+}
+
+.month-husk {
+    background-color: #383838;
+    color: #FDC900;
+}
+
+.husk-content {
+    margin: 0.25em 0.10em 0.3em 0.10em;
+}
+
+p {
+    font-size: 0.6rem;
+    width: 2.25em;
+    margin: 0;
+}
+
+.unavailable {
+    background-color: #cacaca;
+    color: #383838;
+    font-weight: bold;
+}

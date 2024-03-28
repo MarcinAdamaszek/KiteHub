@@ -2,6 +2,9 @@ export interface Spot {
     id: number;
     spotName: string;
     description: string;
+    rating: number;
+    ratesCount: number;
+    reviewsCount: number;
     dateCreated: string;
     isBeginner: boolean;
     isAdvanced: boolean;

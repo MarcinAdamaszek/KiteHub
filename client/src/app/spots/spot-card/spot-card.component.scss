@@ -1,0 +1,38 @@
+h5, h6 {
+    font-family: "Inter";
+    font-weight: bold;
+    line-height: 85%;
+}
+
+.skill-level > p {
+    display: inline;
+    font-family: "Inter";
+}
+
+.skill-level {
+    background-color: #E4E4E4;
+    border-radius: 25px;
+    padding: 6px;
+}
+
+.title-box {
+    padding: 2em 0em;
+    text-align: center;
+    background-color: lightblue;
+    border-radius: 6px 6px 0 0;
+}
+
+.title-box h2 {
+    font-family: "LuckiestGuy";
+    color: black;
+}
+
+.card-header {
+    background-color: #383838;
+    padding: 3px 0;
+}
+
+.card-text {
+    font-family: "Inter";
+    min-height: 100px;;
+}

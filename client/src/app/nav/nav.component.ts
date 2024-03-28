@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LoginModalComponent } from '../modals/login-modal/login-modal.component';

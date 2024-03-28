@@ -138,6 +138,67 @@ namespace API.data.migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("API.Entities.Rate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateRated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpotRatedId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("SpotRatedId");
+
+                    b.ToTable("Rates");
+                });
+
+            modelBuilder.Entity("API.Entities.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AuthorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SpotReviewedId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("SpotReviewedId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("API.Entities.Spot", b =>
                 {
                     b.Property<int>("Id")
@@ -151,6 +212,12 @@ namespace API.data.migrations
 
                     b.Property<bool>("August")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("CreatorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatorName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -168,9 +235,6 @@ namespace API.data.migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsBeginner")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsIntermediate")
                         .HasColumnType("bit");
 
                     b.Property<bool>("January")
@@ -194,6 +258,15 @@ namespace API.data.migrations
                     b.Property<bool>("October")
                         .HasColumnType("bit");
 
+                    b.Property<int>("RatesCount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ReviewsCount")
+                        .HasColumnType("int");
+
                     b.Property<bool>("September")
                         .HasColumnType("bit");
 
@@ -201,6 +274,8 @@ namespace API.data.migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Spots");
                 });
@@ -312,6 +387,54 @@ namespace API.data.migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("API.Entities.Rate", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "Author")
+                        .WithMany("Rates")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Spot", "SpotRated")
+                        .WithMany("Rates")
+                        .HasForeignKey("SpotRatedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("SpotRated");
+                });
+
+            modelBuilder.Entity("API.Entities.Review", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "Author")
+                        .WithMany("Reviews")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Spot", "SpotReviewed")
+                        .WithMany("Reviews")
+                        .HasForeignKey("SpotReviewedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("SpotReviewed");
+                });
+
+            modelBuilder.Entity("API.Entities.Spot", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "Creator")
+                        .WithMany("Spots")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Creator");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("API.Entities.AppRole", null)
@@ -355,7 +478,20 @@ namespace API.data.migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
+                    b.Navigation("Rates");
+
+                    b.Navigation("Reviews");
+
+                    b.Navigation("Spots");
+
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("API.Entities.Spot", b =>
+                {
+                    b.Navigation("Rates");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

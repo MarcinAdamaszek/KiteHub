@@ -13,6 +13,8 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUser
             
     }
     public DbSet<Spot> Spots { get; set; }
+    public DbSet<Rate> Rates { get; set; }
+    public DbSet<Review> Reviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -26,9 +28,44 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUser
         
         builder.Entity<AppRole>()
             .HasMany(ur => ur.UserRoles)
-            .WithOne(u => u.Role)
+            .WithOne(ur => ur.Role)
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired();
+        
+        builder.Entity<AppUser>()
+            .HasMany(ur => ur.Spots)
+            .WithOne(s => s.Creator)
+            .HasForeignKey(s => s.CreatorId)
+            .OnDelete(DeleteBehavior.SetNull);
+        
+        builder.Entity<AppUser>()
+            .HasMany(ur => ur.Reviews)
+            .WithOne(rv => rv.Author)
+            .HasForeignKey(s => s.AuthorId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<AppUser>()
+            .HasMany(ur => ur.Rates)
+            .WithOne(rt => rt.Author)
+            .HasForeignKey(s => s.AuthorId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Spot>()
+            .HasMany(s => s.Reviews)
+            .WithOne(rv => rv.SpotReviewed)
+            .HasForeignKey(rv => rv.SpotReviewedId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.Entity<Spot>()
+            .HasMany(s => s.Rates)
+            .WithOne(rv => rv.SpotRated)
+            .HasForeignKey(rv => rv.SpotRatedId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.Entity<Spot>()
+            .Property(e => e.CreatorId)
+            .IsRequired(false);
+
     }
     
 }

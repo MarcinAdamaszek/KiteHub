@@ -5,6 +5,7 @@ import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { RouterOutlet } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 
@@ -18,12 +19,14 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
+    PaginationModule.forRoot()
   ],
   exports: [
     BrowserAnimationsModule,
     MdbCollapseModule,
     RouterOutlet,
-    ModalModule
+    ModalModule,
+    PaginationModule
   ]
 })
 export class SharedModule { }

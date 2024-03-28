@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h4 class="modal-title">What do you rate it?</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="d-flex justify-content-center">
+        <select [(ngModel)]="selectedRate" class="form-select" aria-label="rate picker">
+            <option selected>5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+    
+    <div class="text-center mt-4 mb-2">
+        <button class="btn btn-lg btn-warning me-2" (click)="submitRate(selectedRate)">RATE</button>
+        <button type="button" class="btn btn-lg btn-secondary" (click)="bsModalRef.hide()">CANCEL</button>
+    </div>
+</div>

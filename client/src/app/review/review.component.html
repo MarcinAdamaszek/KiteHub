@@ -1,0 +1,10 @@
+<div class="container-fluid mt-5 float-start" style="max-width: 600px; ">
+    <div class="row">
+        <p class="name col-6 text-start fw-bold" style="color:#383838;">{{review.authorName}}</p>
+        <p class="col-6 text-end fst-italic">{{truncateDate(review.datePosted.toLocaleString())}}</p>
+    </div>
+    <div class="row mt-2">
+        <p class="content">{{review.content}}</p>
+    </div>
+    <hr style="border-top: 2px solid #383838;">
+</div>

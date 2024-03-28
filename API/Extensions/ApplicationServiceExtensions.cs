@@ -8,8 +8,6 @@ namespace API.Extensions;
 
 public static class ApplicationServiceExtensions
 {
-
-    private static bool _servicesConfigured = false;
     public static IServiceCollection AddApplicationServices(this IServiceCollection services,
          IConfiguration config)
     {
@@ -24,18 +22,9 @@ public static class ApplicationServiceExtensions
 
                 services.AddCors();
                 services.AddScoped<ITokenService, TokenService>();
-
-                if (!_servicesConfigured) 
-                {
-                    services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-                    _servicesConfigured = true;
-                }
-
+                services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
                 services.AddScoped<IUnitOfWork, UnitOfWork>();
-                services.AddScoped<ISpotRepository, SpotRepository>();
-
-                
-
+        
         return services;
     }
 }
