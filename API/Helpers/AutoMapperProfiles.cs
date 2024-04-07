@@ -10,7 +10,7 @@ public class AutoMapperProfiles : Profile
     {
         CreateMap<RegisterDto, AppUser>();
         CreateMap<Spot, SpotDto>();
-        CreateMap<SpotDto, SpotDetailsDto>();
+        CreateMap<Spot, SpotDetailsDto>();
         CreateMap<Rate, RateDto>();
         CreateMap<Review, ReviewDto>();
         CreateMap<DateTime, DateTime>().ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));

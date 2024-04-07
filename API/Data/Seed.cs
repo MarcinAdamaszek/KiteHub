@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.Text.Json;
 using API.Entities;
 using API.Interfaces;
@@ -9,6 +10,26 @@ namespace API.Data;
 
 public class Seed
 {
+
+    public static async Task SeedCountries(UnitOfWork uow, DataContext context)
+    {
+        if (await context.Countries.AnyAsync()) return;
+
+        var countriesData = await File.ReadAllTextAsync("Data/CountriesData.json");
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+        var countries = JsonSerializer.Deserialize<List<Country>>(countriesData, options);
+
+        if (countries == null) return;
+        
+        foreach (var country in countries)
+        {
+            uow.CountryRepository.AddCountry(country);
+        }
+
+        await uow.Complete();
+    }
     public static async Task SeedUsers(UserManager<AppUser> userManager, 
         RoleManager<AppRole> roleManager) 
     {
@@ -67,6 +88,8 @@ public class Seed
         
         foreach (var spot in spots)
         {
+            spot.Latitude = (decimal) -33.9259248;
+            spot.Longitude = (decimal) 18.4258142;
             uow.SpotRepository.AddSpot(spot);
         }
 

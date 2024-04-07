@@ -22,12 +22,8 @@ export class SpotService {
     this.spotParams = new SpotParams();
   }
 
-  getSpotParams() {
-    return this.spotParams;
-  }
-
-  setSpotParams(spotParams: SpotParams) {
-    this.spotParams = spotParams;
+  addSpot(spot: Spot) {
+    return this.http.post<Spot>(this.baseUrl + 'spots', spot);
   }
 
   getSpots(spotParams: SpotParams) {
@@ -52,6 +48,14 @@ export class SpotService {
 
   getSpotDetails(spotId: number) {
     return this.http.get<SpotDetails>(this.baseUrl + 'spots/' + spotId);
+  }
+
+  getSpotParams() {
+    return this.spotParams;
+  }
+
+  setSpotParams(spotParams: SpotParams) {
+    this.spotParams = spotParams;
   }
 
 }

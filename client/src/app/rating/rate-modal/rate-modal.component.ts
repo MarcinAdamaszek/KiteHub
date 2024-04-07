@@ -16,7 +16,7 @@ export class RateModalComponent {
     private rateService: RateService) {}
 
   submitRate(score: string) {
-    this.rateService.rateSpot(score, this.spotId).subscribe({
+    this.rateService.addRate(score, this.spotId).subscribe({
       next: () => {
         this.cancel();
         this.isRateSuccessful = true;

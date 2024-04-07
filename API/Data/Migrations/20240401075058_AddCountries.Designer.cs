@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.data.migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240401075058_AddCountries")]
+    partial class AddCountries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,9 +149,6 @@ namespace API.data.migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Continent")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CountryName")
                         .HasColumnType("nvarchar(max)");
 
@@ -232,12 +232,6 @@ namespace API.data.migrations
                     b.Property<bool>("August")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Continent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("CreatorId")
                         .HasColumnType("int");
 
@@ -270,12 +264,6 @@ namespace API.data.migrations
 
                     b.Property<bool>("June")
                         .HasColumnType("bit");
-
-                    b.Property<decimal>("Latitude")
-                        .HasColumnType("decimal(10, 7)");
-
-                    b.Property<decimal>("Longitude")
-                        .HasColumnType("decimal(10, 7)");
 
                     b.Property<bool>("March")
                         .HasColumnType("bit");

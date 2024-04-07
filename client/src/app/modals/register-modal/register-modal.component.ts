@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AccountService } from 'src/app/_services/account.service';

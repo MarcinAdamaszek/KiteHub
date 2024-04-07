@@ -1,23 +1,10 @@
-namespace API.Entities;
+﻿namespace API.DTOs;
 
-public class Spot
+public class AddSpotDto
 {
-    public int Id { get; set; }
     public string SpotName { get; set; } = "Unnamed Spot";
-    public decimal Latitude { get; set; } = 0;
-    public decimal Longitude { get; set; } = 0;
     public string Country { get; set; } = "Unknown";
-    public string Continent { get; set; } = "Unknown";
     public string Description { get; set; } = string.Empty;
-    public int? CreatorId { get; set; }
-    public string CreatorName { get; set; }  = string.Empty;
-    public AppUser Creator { get; set; }
-    public List<Rate> Rates { get; set; } = new();
-    public List<Review> Reviews { get; set; } = new();
-    public double Rating { get; set; } = 0;
-    public int RatesCount { get; set; } = 0;
-    public int ReviewsCount { get; set; } = 0;
-    public DateTime DateCreated { get; set; } = DateTime.UtcNow;
     public bool IsBeginner { get; set; }
     public bool IsAdvanced { get; set; }
     public bool January { get; set; }

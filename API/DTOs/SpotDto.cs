@@ -4,6 +4,8 @@ public class SpotDto
 {
     public int Id { get; set; }
     public string SpotName { get; set; } = "Unnamed Spot";
+    public string Country { get; set; } = "Unknown";
+    public string Continent { get; set; } = "Unknown";
     public string Description { get; set; } = string.Empty;
     public double Rating { get; set; }
     public int RatesCount { get; set; }

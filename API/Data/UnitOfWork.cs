@@ -17,6 +17,7 @@ public class UnitOfWork : IUnitOfWork
         _mapper);
     public IRateRepository RateRepository => new RateRepository(_context);
     public IReviewRepository ReviewRepository => new ReviewRepository(_context, _mapper);
+    public ICountryRepository CountryRepository => new CountryRepository(_context);
     public async Task<bool> Complete()
     {
         return await _context.SaveChangesAsync() > 0;

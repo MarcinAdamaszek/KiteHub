@@ -1,6 +1,8 @@
 export interface Spot {
     id: number;
     spotName: string;
+    country: string;
+    continent: string;
     description: string;
     rating: number;
     ratesCount: number;

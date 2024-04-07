@@ -15,7 +15,7 @@ export class RateService {
     
   }
 
-  rateSpot(score: string, spotId: string) {
+  addRate(score: string, spotId: string) {
     const params = new HttpParams()
       .set('score', score)
       .set('spotId', spotId);

@@ -3,6 +3,10 @@ import { Review } from "./review";
 export interface SpotDetails {
     id: number;
     spotName: string;
+    latitude: number;
+    longitude: number;
+    country: string;
+    continent: string;
     description: string;
     creatorName: string,
     reviews: Review[],

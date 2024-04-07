@@ -13,13 +13,12 @@
                             <app-calendar-small [spot]="spot"></app-calendar-small>
                         </div>
                         <div class="row justify-content-evenly">
-                            <div class="col-6 mb-5">
+                            <div class="col-6 mb-5 mt-3">
                                 <div class="mb-2">
                                     <i class="fa-solid fa-map-location-dot fa-2xl" style="color: #383838;"></i>
                                 </div>
-                                <h5>Cape Town</h5>
-                                <h5>RPA</h5>
-                                <h5>Africa</h5>
+                                <h5>{{spot.country}}</h5>
+                                <h4>{{spot.continent}}</h4>
                             </div>
                             <div class="col-6 mb-4 mt-1 text-start">
                                 <div class="skill-level mb-3" style="width: 140px;"

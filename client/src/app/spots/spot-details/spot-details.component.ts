@@ -23,8 +23,7 @@ export class SpotDetailsComponent implements OnInit {
 
   constructor(private spotService: SpotService, 
     private route: ActivatedRoute, private modalService: BsModalService,
-    public accountService: AccountService, private reviewService: ReviewService,
-      private toastr: ToastrService) {
+    public accountService: AccountService, private reviewService: ReviewService) {
     this.loadSpot();
   }
 
@@ -78,6 +77,11 @@ export class SpotDetailsComponent implements OnInit {
         },
         error: err => console.log(err)
       })
+  }
+
+  openLocation() {
+    window.open(`https://maps.google.com/?q=${this.spotDetails.latitude},
+    ${this.spotDetails.longitude}&ll=${this.spotDetails.latitude},${this.spotDetails.longitude}&z=3`);
   }
 
 }

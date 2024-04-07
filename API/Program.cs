@@ -57,6 +57,7 @@ try
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     var uow = new UnitOfWork(context, mapper);
     await context.Database.MigrateAsync();
+    await Seed.SeedCountries(uow, context);
     await Seed.SeedUsers(userManager, roleManager);
     await Seed.SeedSpots(uow, context);
 }

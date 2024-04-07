@@ -1,5 +1,5 @@
-<div class="mx-3 my-3 mx-2 col-6 col-md-12 text-center d-flex align-items-center flex-wrap justify-content-center my-1" style="height: 120px;">
-    <div class="husk-box" [class.selected]="selectedMonth === 'january'">
+<div class="calendar-box mx-3 col-6 col-md-12 text-center d-flex align-items-center flex-wrap justify-content-center my-1" style="min-height: 120px;">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('january')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('january')"
             >
@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'february'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('february')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('february')"
             >
@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'march'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('march')">
         <div class="text-center border rounded-bottom-5 rounded-top-2
              month-husk" (click)="toggleSelected('march')"
             >
@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'april'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('april')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('april')"
             >
@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'may'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('may')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('may')"
             >
@@ -49,7 +49,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'june'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('june')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('june')"
             >
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-<div class="husk-box" [class.selected]="selectedMonth === 'july'">
+<div class="husk-box" [class.selected]="monthsToggledOn.includes('july')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('july')"
             >
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'august'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('august')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('august')"
             >
@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'september'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('september')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('september')"
             >
@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'october'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('october')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('october')"
             >
@@ -99,7 +99,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'november'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('november')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('november')"
             >
@@ -109,7 +109,7 @@
             </div>
         </div>
     </div>
-    <div class="husk-box" [class.selected]="selectedMonth === 'december'">
+    <div class="husk-box" [class.selected]="monthsToggledOn.includes('december')">
         <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
             (click)="toggleSelected('december')"
             >

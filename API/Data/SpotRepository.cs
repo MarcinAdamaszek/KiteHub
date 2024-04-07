@@ -40,14 +40,6 @@ public class SpotRepository : ISpotRepository
             .Where(s => s.Id == spotId)
             .SingleOrDefaultAsync();
     }
-
-    public async Task<SpotDto> GetSpotDtoAsync(int spotId)
-    {
-        return await _context.Spots
-            .Where(s => s.Id == spotId)
-            .ProjectTo<SpotDto>(_mapper.ConfigurationProvider)
-            .SingleOrDefaultAsync();
-    }
     public void UpdateSpot(Spot spot)
     {
         _context.Entry(spot).State = EntityState.Modified;

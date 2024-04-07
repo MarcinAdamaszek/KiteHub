@@ -15,6 +15,7 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUser
     public DbSet<Spot> Spots { get; set; }
     public DbSet<Rate> Rates { get; set; }
     public DbSet<Review> Reviews { get; set; }
+    public DbSet<Country> Countries { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -66,6 +67,13 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUser
             .Property(e => e.CreatorId)
             .IsRequired(false);
 
+        builder.Entity<Spot>()
+            .Property(s => s.Latitude)
+            .HasColumnType("decimal(10, 7)");
+
+        builder.Entity<Spot>()
+            .Property(s => s.Longitude)
+            .HasColumnType("decimal(10, 7)");
     }
     
 }

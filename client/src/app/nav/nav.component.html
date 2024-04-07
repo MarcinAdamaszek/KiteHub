@@ -24,6 +24,9 @@
         </li>
       </ul>
     </div>
+    <button class="btn btn-large btn-light p-2 fs-5 rounded-5 me-3" [routerLink]="'/add-spot'" routerLinkActive="active" *ngIf="(accountService.currentUser$ | async)">
+      New spot +
+    </button>
     <div class="me-3">
       <button class="btn btn-large btn-warning p-2 fs-5 rounded-5 me-1" *ngIf="!(accountService.currentUser$ | async)"
          (click)="openLoginModal()" style="min-width: 90px;">
@@ -34,8 +37,8 @@
         Sign up
       </button>
       <button class="btn btn-warning p-2 fs-5 rounded-5" *ngIf="(accountService.currentUser$ | async)"
-        style="min-width: 100px;" (click)="logout()">
-        Log out
+        style="min-width: 105px;" (click)="logout()">
+        Sign out
       </button>  
     </div>
   </div>

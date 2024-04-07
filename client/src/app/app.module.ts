@@ -26,6 +26,8 @@ import { RatingStarsComponent } from './rating/rating-stars/rating-stars.compone
 import { ReviewComponent } from './review/review.component';
 import { RateModalComponent } from './rating/rate-modal/rate-modal.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { AddSpotComponent } from './spots/add-spot/add-spot.component';
+import { AddSpotSuccessComponent } from './spots/add-spot-success/add-spot-success.component';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     RatingStarsComponent,
     ReviewComponent,
     RateModalComponent,
+    AddSpotComponent,
+    AddSpotSuccessComponent,
   ],
   imports: [
     BrowserModule,

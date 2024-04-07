@@ -1,0 +1,53 @@
+<div class="add-spot-page d-flex justify-content-center pt-5">
+    <div class="card mx-3 align-self-start" style="width: 800px;">
+        <div class="card-header">
+            <h4 class="mb-2">Create a new spot</h4>
+        </div>
+        <div class="card-body">
+
+            <form [formGroup]="addSpotForm" (ngSubmit)="addSpotForm.valid && addSpot()" autocomplete="off">
+                <h5>What's the name of the place?</h5>
+                <app-text-input [formControl]="$any(addSpotForm.controls['spotname'])" [label]="'Spot name'">
+                </app-text-input>
+                <br>
+                <h5>Where is it located?</h5>
+                <select formControlName="country" *ngIf="countries" class="form-select" aria-label="country select">
+                    <option value="" disabled selected hidden>Select country</option>
+                    <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
+                </select>
+                <br>
+                <br>
+                <h5>Tell us about the spot</h5>
+                <textarea formControlName="description" class="form-control" id="description-text-area" rows="3"
+                    placeholder="Type spot description here.."></textarea>
+                <br>
+                <h5>Choose difficulties</h5>
+                <div class="form-check form-switch">
+                    <input formControlName="isAdvanced" class="form-check-input" type="checkbox" id="advancedCheck">
+                    <label class="form-check-label" for="advancedCheck">Is this spot suitable for advanced riders?</label>
+                </div>
+                <div class="form-check form-switch mt-2">
+                    <input formControlName="isBeginner" class="form-check-input" type="checkbox" id="beginnerCheck">
+                    <label class="form-check-label" for="beginnerCheck">Is this spot beginner-friendly?</label>
+                </div>
+                <div class="row" *ngIf="validationErrors">
+                    <ul class="text-danger">
+                        <li *ngFor="let error of validationErrors">
+                            {{error}}
+                        </li>
+                    </ul>
+                </div>
+                <br>
+                <br>
+                <h5>Pick the months for the spot's peak season:</h5>
+                <app-calendar [multiSelectionOn]="true" (newMonthSelected)="monthsSelected = $event"></app-calendar>
+                <div class="text-center mt-4 mb-2">
+                    <button [disabled]="!addSpotForm.valid" class="btn btn-lg btn-warning me-2" type="submit">Add
+                        spot</button>
+                    <button type="button" class="btn btn-lg btn-secondary" (click)="cancel()">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

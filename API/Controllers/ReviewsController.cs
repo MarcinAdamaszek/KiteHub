@@ -24,7 +24,7 @@ public class ReviewsController : BaseApiController
 
     [Authorize]
     [HttpPost]
-    public async Task<ActionResult> AddReview(AddReviewDto addReviewDto)
+    public async Task<ActionResult<ReviewDto>> AddReview(AddReviewDto addReviewDto)
     {
         var spotReviewed = await _uow.SpotRepository.GetSpotAsync(addReviewDto.SpotReviewedId);
 
