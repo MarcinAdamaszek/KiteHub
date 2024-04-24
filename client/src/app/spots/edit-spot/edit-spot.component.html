@@ -1,0 +1,55 @@
+<div class="edit-spot-page d-flex justify-content-center pt-5">
+    <div class="card mx-3 align-self-start shadow my-5" style="width: 800px;">
+        <div class="card-header p-2">
+            <h4 class="mt-1">Edit Spot</h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="editForm" autocomplete="off" (ngSubmit)="editForm.valid && updateSpot()">
+                <h5>Spot name:</h5>
+                <app-text-input [formControl]="$any(editForm.controls['spotname'])" [label]="'spot name'">
+                </app-text-input>
+                <h5>Country:</h5>
+                <select formControlName="country" *ngIf="countries" class="form-select" aria-label="country select">
+                    <option value="" disabled selected hidden>Select country</option>
+                    <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
+                </select>
+                <br>
+                <h5>Latitude</h5>
+                <app-text-input [formControl]="$any(editForm.controls['latitude'])" [label]="'latitude'">
+                </app-text-input>
+                <h5>Longitude</h5>
+                <app-text-input [formControl]="$any(editForm.controls['longitude'])" [label]="'longitude'">
+                </app-text-input>
+                <br>
+                <h5>Description:</h5>
+                <textarea formControlName="description" class="form-control" id="description-text-area" rows="3"
+                    placeholder="Type spot description here.."></textarea>
+                <br>
+                <h5>Difficulties</h5>
+                <div class="form-check form-switch">
+                    <input formControlName="isAdvanced" class="form-check-input" type="checkbox" id="advancedCheck">
+                    <label class="form-check-label" for="advancedCheck">Is this spot suitable for advanced riders?</label>
+                </div>
+                <div class="form-check form-switch mt-2">
+                    <input formControlName="isBeginner" class="form-check-input" type="checkbox" id="beginnerCheck">
+                    <label class="form-check-label" for="beginnerCheck">Is this spot beginner-friendly?</label>
+                </div>
+                <div class="row" *ngIf="validationErrors">
+                    <ul class="text-danger">
+                        <li *ngFor="let error of validationErrors">
+                            {{error}}
+                        </li>
+                    </ul>
+                </div>
+                <br>
+                <br>
+                <h5>Best season months:</h5>
+                <app-calendar [monthsToggledOn]="monthsSelected" [multiSelectionOn]="true" (selectionChanged)="monthsSelected = $event; editForm.markAsDirty()"></app-calendar>
+                <div class="text-center mt-4 mb-2">
+                    <button [disabled]="!editForm.valid || !editForm.dirty" class="btn btn-lg btn-warning me-2 shadow-sm mb-2" type="submit" >Save changes</button>
+                    <button type="button" class="btn btn-lg btn-secondary shadow-sm mb-2" (click)="cancel()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

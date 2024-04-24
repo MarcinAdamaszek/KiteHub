@@ -1,24 +1,29 @@
-<div class="add-spot-page d-flex justify-content-center pt-5">
-    <div class="card mx-3 align-self-start" style="width: 800px;">
-        <div class="card-header">
-            <h4 class="mb-2">Create a new spot</h4>
+<div class="add-spot-page d-flex justify-content-center">
+    <div class="card mx-3 my-5 align-self-start shadow" style="width: 800px;">
+        <div class="card-header p-2">
+            <h4 class="mt-1">Create a new spot</h4>
         </div>
         <div class="card-body">
-
             <form [formGroup]="addSpotForm" (ngSubmit)="addSpotForm.valid && addSpot()" autocomplete="off">
                 <h5>What's the name of the place?</h5>
-                <app-text-input [formControl]="$any(addSpotForm.controls['spotname'])" [label]="'Spot name'">
+                <app-text-input [formControl]="$any(addSpotForm.controls['spotname'])" [label]="'spot name'">
                 </app-text-input>
                 <br>
                 <h5>Where is it located?</h5>
-                <select formControlName="country" *ngIf="countries" class="form-select" aria-label="country select">
+                <h6>Country:</h6>
+                <select formControlName="country" *ngIf="countries" class="form-select mb-2 mt-1" aria-label="country select">
                     <option value="" disabled selected hidden>Select country</option>
                     <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
                 </select>
-                <br>
+                <h6>Latitude:</h6>
+                <app-text-input [formControl]="$any(addSpotForm.controls['latitude'])" [label]="'latitude'">
+                </app-text-input>
+                <h6>Longitude:</h6>
+                <app-text-input [formControl]="$any(addSpotForm.controls['longitude'])" [label]="'longitude'">
+                </app-text-input>
                 <br>
                 <h5>Tell us about the spot</h5>
-                <textarea formControlName="description" class="form-control" id="description-text-area" rows="3"
+                <textarea formControlName="description" class="form-control " id="description-text-area" rows="3"
                     placeholder="Type spot description here.."></textarea>
                 <br>
                 <h5>Choose difficulties</h5>
@@ -40,7 +45,7 @@
                 <br>
                 <br>
                 <h5>Pick the months for the spot's peak season:</h5>
-                <app-calendar [multiSelectionOn]="true" (newMonthSelected)="monthsSelected = $event"></app-calendar>
+                <app-calendar [multiSelectionOn]="true" (selectionChanged)="monthsSelected = $event"></app-calendar>
                 <div class="text-center mt-4 mb-2">
                     <button [disabled]="!addSpotForm.valid" class="btn btn-lg btn-warning me-2" type="submit">Add
                         spot</button>

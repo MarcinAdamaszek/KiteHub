@@ -1,5 +1,5 @@
 <div class="container-fluid mt-5">
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-lg-5 col-11 text-center pt-5 ms-4 me-2">
             <div class="name-box">
                 <h1>{{spotDetails.spotName}}</h1>
@@ -14,8 +14,14 @@
                         <app-rating-stars class="ms-2" *ngIf="spotDetails.rating" [rating]="spotDetails.rating"></app-rating-stars>
                         <h3 class="mt-2 ms-3" style="color:white;" *ngIf="!spotDetails.rating">No rates yet..</h3>
                     </div>
-                    <button *ngIf="(accountService.currentUser$ | async)" class="btn btn-warning btn-lg" (click)="openRateModal()">
-                        <h2 class="rating-button-text">RATE</h2>
+                    <div class="tooltip-wrapper" tooltip="Only logged-in users can rate spots" *ngIf="!(accountService.currentUser$ | async)">
+                        <button class="btn btn-warning btn-lg shadow-sm" style="height: 78px;" [disabled]="!(accountService.currentUser$ | async)">
+                            <h2 class="rating-button-text">RATE</h2>
+                        </button>
+                    </div>
+                    <button class="btn btn-warning btn-lg shadow-sm" *ngIf="accountService.currentUser$ | async" 
+                        (click)="openRateModal()" style="height: 78px;">
+                            <h2 class="rating-button-text">RATE</h2>
                     </button>
                 </div>
                 <div class="my-5">
@@ -45,24 +51,35 @@
                 <h2>Location:</h2>
                 <h3>{{spotDetails.country}}</h3>
                 <h3>{{spotDetails.continent}}</h3>
-                    <button class="btn btn-lg btn-warning" [disabled]="spotDetails.latitude == 0 && spotDetails.latitude == 0"
+                    <button class="btn btn-lg btn-warning shadow-sm me-3 mb-3" [disabled]="spotDetails.latitude == 0 && spotDetails.longitude == 0"
                         (click)="openLocation()">
                         <img src="../../../assets/icons/address-location-icon.svg" alt="" style="width: 40px;" class="ms-2 me-2">
                         <h6 class="mt-2 fw-bold">Show on map</h6>
                     </button>
+                    <button class="btn btn-lg btn-warning shadow-sm mb-3" [disabled]="spotDetails.latitude == 0 && spotDetails.longitude == 0"
+                        (click)="openForecast()">
+                        <img src="../../../assets/icons/day-cloud-wind-icon.svg" alt="" style="width: 51.3px;" class="ms-2 me-2">
+                        <h6 class="mt-2 fw-bold">Forecast</h6>
+                    </button>
             </div>
             <div class="reviews-container mt-5 pe-3" style="max-width: 600px;">
                 <h2 class="ms-1">Reviews:</h2>
-                <div class="review-post-box" *ngIf="(accountService.currentUser$ | async)">
+                <div class="review-post-box">
                     <label for="review-text-area" class="form-label" >Any thoughts on the spot?</label>
-                    <textarea [(ngModel)]="reviewContent" class="form-control" id="review-text-area" rows="3"></textarea>
-                    <button [disabled]="!reviewContent" class="btn btn-warning mt-3" (click)="postReview()">
+                    <textarea [(ngModel)]="reviewContent" class="form-control" id="review-text-area" rows="3" [disabled]="!(accountService.currentUser$ | async)"></textarea>
+                    <div class="tooltip-wrapper mt-3" style="width: 114px;" tooltip="Only logged-in users can add reviews" *ngIf="!(accountService.currentUser$ | async)">
+                        <button [disabled]="!(accountService.currentUser$ | async) || !reviewContent" class="btn btn-warning shadow-sm">
+                            <h6 class="mt-2 fw-bold">Add review</h6>
+                        </button>
+                    </div>
+                    <button *ngIf="accountService.currentUser$ | async" class="btn btn-warning mt-3 shadow-sm" (click)="postReview()">
                         <h6 class="mt-2 fw-bold">Add review</h6>
                     </button>
                 </div>
                 <div class="reviews" *ngFor="let review of spotDetails.reviews">
                     <app-review [review]="review"></app-review>
                 </div>
+                <h4 *ngIf="spotDetails.reviews?.length === 0" class="mt-3">No reviews yet..</h4>
             </div>
         </div>
     </div>

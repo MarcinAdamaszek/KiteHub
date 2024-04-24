@@ -1,6 +1,7 @@
-<div class="calendar-box mx-3 col-6 col-md-12 text-center d-flex align-items-center flex-wrap justify-content-center my-1" style="min-height: 120px;">
+<div class="d-flex flex-column align-items-center container">
+<div class="calendar-box col-6 col-md-12 d-flex align-items-center flex-wrap justify-content-center my-1">
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('january')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('january')"
             >
             <div class="husk-content">
@@ -10,7 +11,7 @@
         </div>
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('february')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('february')"
             >
             <div class="husk-content">
@@ -21,7 +22,7 @@
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('march')">
         <div class="text-center border rounded-bottom-5 rounded-top-2
-             month-husk" (click)="toggleSelected('march')"
+             month-husk shadow-sm" (click)="toggleSelected('march')"
             >
             <div class="husk-content">
                 <p class="mb-1">MAR</p>
@@ -30,7 +31,7 @@
         </div>
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('april')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('april')"
             >
             <div class="husk-content">
@@ -40,7 +41,7 @@
         </div>
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('may')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('may')"
             >
             <div class="husk-content">
@@ -50,7 +51,7 @@
         </div>
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('june')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('june')"
             >
             <div class="husk-content">
@@ -60,7 +61,7 @@
         </div>
     </div>
 <div class="husk-box" [class.selected]="monthsToggledOn.includes('july')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('july')"
             >
             <div class="husk-content">
@@ -70,7 +71,7 @@
         </div>
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('august')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('august')"
             >
             <div class="husk-content">
@@ -80,7 +81,7 @@
         </div>
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('september')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('september')"
             >
             <div class="husk-content">
@@ -90,7 +91,7 @@
         </div>
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('october')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('october')"
             >
             <div class="husk-content">
@@ -100,7 +101,7 @@
         </div>
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('november')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('november')"
             >
             <div class="husk-content">
@@ -110,7 +111,7 @@
         </div>
     </div>
     <div class="husk-box" [class.selected]="monthsToggledOn.includes('december')">
-        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk" 
+        <div class="text-center border rounded-bottom-5 rounded-top-2 month-husk shadow-sm" 
             (click)="toggleSelected('december')"
             >
             <div class="husk-content">
@@ -119,4 +120,6 @@
             </div>
         </div>
     </div>
+</div>
+<button type="button" class="reset-calendar-button shadow-sm mt-1" (click)="resetMonthToggle()">Reset</button>
 </div>

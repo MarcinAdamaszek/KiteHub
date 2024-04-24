@@ -7,6 +7,7 @@ h4, h5, h6 {
 .skill-level > p {
     display: inline;
     font-family: "Inter";
+    font-weight: 600;
 }
 
 .skill-level {
@@ -27,12 +28,61 @@ h4, h5, h6 {
     color: black;
 }
 
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+    z-index: 1; 
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
 .card-header {
     background-color: #383838;
     padding: 3px 0;
 }
 
+.card-header-approved {
+    background-color: #63c44b;
+}
+
+.card-header-unapproved {
+    background-color: #969696;
+}
+
+.card-header-approved, .card-header-unapproved {
+    color: white;
+    font-family: "Inter";
+    letter-spacing: 3px;
+}
+
 .card-text {
     font-family: "Inter";
-    min-height: 100px;;
+    display: flex;
+    flex-direction: column;
 }
+
+p {
+    max-width: 350px;
+    align-self: flex-end;
+    word-wrap: break-word;
+}
+
+.wrapper-button {
+    border: none;
+    background: none;
+}
+
+.moderate-buttons button {
+    font-family: "Inter";
+}
+
+

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, take } from 'rxjs';
 import { User } from '../_models/user';
 import { environment } from 'src/environments/environment.development';
 
@@ -44,6 +44,9 @@ export class AccountService {
   }
 
   logout() {
+    this.currentUser$.pipe(take(1)).subscribe({
+      next: user => console.log(user)
+    })
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
   }

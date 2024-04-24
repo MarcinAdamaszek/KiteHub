@@ -1,19 +1,32 @@
 h1 {
-    font-family: LuckiestGuy; 
+    font-family: "LuckiestGuy"; 
     letter-spacing: 0.1em;
     color: #FDC900;
 }
 
-li a {
-    color: white;
-    font-family: "Inter";
-    letter-spacing: 0.05em;
-}
-
 .btn {
     text-transform: none !important;
+    font-family: "Inter";
+    font-weight: 500;
 }
 
 .navbar {
     font-family: "Inter";
+}
+
+li a h4 {
+    text-decoration: none;
+    transition: color 0.3s ease;
+    color: white;
+    font-family: "Inter";
+    letter-spacing: 0.05em;
+    font-weight: 400;
+}
+
+li a h4:hover {
+    color: #FDC900;
+}
+
+.active-link {
+    color: #FDC900; 
 }

@@ -6,22 +6,28 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { SpotDetailsComponent } from './spots/spot-details/spot-details.component';
 import { AddSpotComponent } from './spots/add-spot/add-spot.component';
-import { AddSpotSuccessComponent } from './spots/add-spot-success/add-spot-success.component';
+import { EditSpotComponent } from './spots/edit-spot/edit-spot.component';
+import { SpotListModerationComponent } from './spots/spot-list-moderation/spot-list-moderation.component';
+import { ActionFeedbackComponent } from './feedback/action-feedback/action-feedback.component';
+import { ReviewsModerationComponent } from './reviews/reviews-moderation/reviews-moderation.component';
 
 const routes: Routes = [
   { path: '', component: SpotListComponent },
   { path: 'spots', component: SpotListComponent },
+  { path: 'spots-moderation', component: SpotListModerationComponent },
   { path: 'spots/:id', component: SpotDetailsComponent },
+  { path: 'edit-spot/:id', component: EditSpotComponent },
+  { path: 'reviews-moderation', component: ReviewsModerationComponent },
   { path: 'add-spot', component: AddSpotComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'add-spot-success', component: AddSpotSuccessComponent },
+  { path: 'action-feedback', component: ActionFeedbackComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
   { path: '**', component: NotFoundComponent, pathMatch: "full" }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

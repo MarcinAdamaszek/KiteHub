@@ -1,0 +1,16 @@
+<div class="button-wrapper text-center p-2" style="background-color: antiquewhite;">
+    <button class="btn btn-lg btn-warning shadow-sm mt-5" routerLink="/spots-moderation">Moderate Spots</button>
+</div>
+
+<div class="add-spot-page d-flex justify-content-center">
+    <div class="card mx-3 mb-5 mt-4 align-self-start shadow" style="width: 800px;">
+        <div class="card-header p-2">
+            <h4 class="mt-1">New reviews</h4>
+        </div>
+        <div class="card-body">
+            <div class="reviews" *ngFor="let review of unapprovedReviews">
+                <app-review [moderation]="true" [review]="review" (reviewManipulatedEvent)="getUnapprovedReviews()"></app-review>
+            </div>
+        </div>
+    </div>
+</div>

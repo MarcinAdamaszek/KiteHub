@@ -11,6 +11,7 @@ public class AutoMapperProfiles : Profile
         CreateMap<RegisterDto, AppUser>();
         CreateMap<Spot, SpotDto>();
         CreateMap<Spot, SpotDetailsDto>();
+        CreateMap<SpotManipulationDto, Spot>();
         CreateMap<Rate, RateDto>();
         CreateMap<Review, ReviewDto>();
         CreateMap<DateTime, DateTime>().ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));

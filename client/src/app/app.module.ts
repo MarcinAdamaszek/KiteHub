@@ -13,8 +13,8 @@ import { CalendarComponent } from './calendars/calendar/calendar.component';
 import { CalendarSmallComponent } from './calendars/calendar-small/calendar-small.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginModalComponent } from './modals/login-modal/login-modal.component';
-import { RegisterModalComponent } from './modals/register-modal/register-modal.component';
+import { LoginModalComponent } from './account/login-modal/login-modal.component';
+import { RegisterModalComponent } from './account/register-modal/register-modal.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
@@ -23,11 +23,16 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { RepeatDirective } from './_directives/repeat.directive';
 import { SpotDetailsComponent } from './spots/spot-details/spot-details.component';
 import { RatingStarsComponent } from './rating/rating-stars/rating-stars.component';
-import { ReviewComponent } from './review/review.component';
+import { ReviewComponent } from './reviews/review/review.component';
 import { RateModalComponent } from './rating/rate-modal/rate-modal.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { AddSpotComponent } from './spots/add-spot/add-spot.component';
-import { AddSpotSuccessComponent } from './spots/add-spot-success/add-spot-success.component';
+import { EditSpotComponent } from './spots/edit-spot/edit-spot.component';
+import { SpotListModerationComponent } from './spots/spot-list-moderation/spot-list-moderation.component';
+import { ActionFeedbackComponent } from './feedback/action-feedback/action-feedback.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { ReviewsModerationComponent } from './reviews/reviews-moderation/reviews-moderation.component';
+import { FeedbackModalComponent } from './feedback/feedback-modal/feedback-modal.component';
 
 
 @NgModule({
@@ -51,7 +56,12 @@ import { AddSpotSuccessComponent } from './spots/add-spot-success/add-spot-succe
     ReviewComponent,
     RateModalComponent,
     AddSpotComponent,
-    AddSpotSuccessComponent,
+    EditSpotComponent,
+    SpotListModerationComponent,
+    ActionFeedbackComponent,
+    ConfirmModalComponent,
+    ReviewsModerationComponent,
+    FeedbackModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+.main-container {
+    width: 100%;
+    min-height: 100vh;
+    // overflow: hidden;
+    // position: relative;
+    background-color: antiquewhite;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.card {
+    border: none;
+}
+
+.card-header {
+    color: white;
+    background-color: #383838;
+    text-align: center;
+    height: 50px;
+}
+
+h5, h1, button {
+    font-family: "Inter";
+}

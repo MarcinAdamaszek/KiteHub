@@ -32,7 +32,7 @@ public class ReviewsController : BaseApiController
 
         var user = await _userManager.GetUserAsync(User);
 
-        var reviews = await _uow.ReviewRepository.GetReviewsForSpotAsync(addReviewDto.SpotReviewedId);
+        var reviews = await _uow.ReviewRepository.GetReviewsForSpotAsync(addReviewDto.SpotReviewedId, false);
         
         if (reviews.Any(r => r.AuthorName == user.UserName)) 
             return BadRequest("You have already reviewed the spot");
@@ -45,7 +45,8 @@ public class ReviewsController : BaseApiController
             DatePosted = DateTime.UtcNow,
             Author = user,
             AuthorName = user.UserName,
-            SpotReviewed = spotReviewed
+            SpotReviewed = spotReviewed,
+            IsApproved = false
         };
 
         _uow.ReviewRepository.AddReview(review);
@@ -53,5 +54,44 @@ public class ReviewsController : BaseApiController
         if (await _uow.Complete()) return Ok(_mapper.Map<ReviewDto>(review));
 
         return BadRequest("Failed to rate spot");
+    }
+
+    [Authorize(Policy = "RequireAdminRole")]
+    [HttpGet("unapproved")]
+    public async Task<ActionResult<List<ReviewDto>>> GetUnapprovedReviews()
+    {
+        var reviews = await _uow.ReviewRepository.GetUnapprovedReviewsAsync();
+
+        return Ok(_mapper.Map<List<ReviewDto>>(reviews));
+    }
+
+    [Authorize(Policy = "RequireAdminRole")]
+    [HttpDelete("{reviewId}")]
+    public async Task<ActionResult> DeleteReview(int reviewId)
+    {
+        var review = await _uow.ReviewRepository.GetReviewByIdAsync(reviewId);
+
+        if (review == null) return NotFound();
+
+        _uow.ReviewRepository.DeleteReview(review);
+
+        if (!await _uow.Complete()) return BadRequest("Failed to delete review");
+
+        return NoContent();
+    }
+
+    [Authorize(Policy = "RequireAdminRole")]
+    [HttpPut("approve/{reviewId}")]
+    public async Task<ActionResult<ReviewDto>> ApproveReview(int reviewId)
+    {
+        var review = await _uow.ReviewRepository.GetReviewByIdAsync(reviewId);
+
+        if (review == null) return NotFound();
+
+        review.IsApproved = true;
+
+        if (!await _uow.Complete()) return BadRequest("Failed to delete review");
+
+        return Ok(_mapper.Map<ReviewDto>(review)); 
     }
 }

@@ -1,56 +1,66 @@
-        
-            <a routerLink="/spots/{{spot.id}}">
-            <div class="card active" style="min-width: 400px;">
-                <div class="title-box"> 
-                    <h2 class="card-title align-middle">{{spot.spotName}}</h2>
-                    </div>
-                <div class="card-header mb-2">
-                    <app-rating-stars [rating]="spot.rating"></app-rating-stars>
+<button class="wrapper-button" routerLink="/spots/{{spot.id}}" [disabled]="moderation">
+    <div class="card active shadow" style="min-width: 400px;">
+        <div class="title-box">
+            <h2 class="card-title align-middle">{{spot.spotName}}</h2>
+        </div>
+        <div class="card-header-approved mb-2" *ngIf="moderation && spot.isApproved">
+            <h4 class="mt-2">APPROVED</h4>
+        </div>
+        <div class="card-header-unapproved mb-2" *ngIf="moderation && !spot.isApproved">
+            <h4 class="mt-2">UNAPPROVED</h4>
+        </div>
+        <div class="card-header mb-2" *ngIf="!moderation">
+            <app-rating-stars [rating]="spot.rating"></app-rating-stars>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row mb-4">
+                    <app-calendar-small [spot]="spot"></app-calendar-small>
                 </div>
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row mb-4">
-                            <app-calendar-small [spot]="spot"></app-calendar-small>
+                <div class="row justify-content-evenly" style="min-height: 250px;">
+                    <div class="col-6 mt-3 d-flex flex-column justify-content-center">
+                        <div class="mb-2">
+                            <i class="fa-solid fa-map-location-dot fa-2xl" style="color: #383838;"></i>
                         </div>
-                        <div class="row justify-content-evenly">
-                            <div class="col-6 mb-5 mt-3">
-                                <div class="mb-2">
-                                    <i class="fa-solid fa-map-location-dot fa-2xl" style="color: #383838;"></i>
-                                </div>
-                                <h5>{{spot.country}}</h5>
-                                <h4>{{spot.continent}}</h4>
-                            </div>
-                            <div class="col-6 mb-4 mt-1 text-start">
-                                <div class="skill-level mb-3" style="width: 140px;"
-                                    *ngIf="spot?.isAdvanced">
-                                    <img src="../../assets/icons/high-risk-icon.svg" alt="" 
-                                        style="width: 20px;"
-                                        class="ms-2 me-2">
-                                    <p>Advanced</p>
-                                </div>
-                                <div class="skill-level" style="width: 130px;"
-                                    *ngIf="spot?.isBeginner">
-                                        <img src="../../assets/icons/low-risk-icon.svg" alt="" 
-                                            style="width: 20px;"
-                                            class="ms-2 me-2">
-                                        <p>Beginner</p>
-                                </div>
-                            </div>
-                            <p class="card-text">{{TruncateDescription(spot.description)}}</p>
+                        <h5>{{spot.country}}</h5>
+                        <h4>{{spot.continent}}</h4>
+                    </div>
+                    <div class="col-6 mt-1 text-start d-flex flex-column justify-content-center">
+                        <div class="skill-level mb-3" style="width: 140px;" *ngIf="spot?.isAdvanced">
+                            <img src="../../assets/icons/high-risk-icon.svg" alt="" style="width: 20px;"
+                                class="ms-2 me-2">
+                            <p>Advanced</p>
                         </div>
-                        <hr style="border-top: 2px solid #383838;">
-                        <div class="row mt-4 ms-4">
-                            <div class="col-6 d-flex align-middle">
-                                <img src="../../assets/icons/star-grey.svg" alt="" style="width: 20px;" class="ms-2 me-2">
-                                <h6 style="margin-top: 11px;">{{spot.ratesCount}} Rates</h6>
-                            </div>
-                            <div class="col-6 d-flex align-middle">
-                                <img src="../../assets/icons/speech-bubble-grey.svg" alt="" style="width: 20px;" class="ms-2 me-2">
-                                <h6 style="margin-top: 11px;">{{spot.reviewsCount}} Reviews</h6>
-                            </div>
+                        <div class="skill-level" style="width: 130px;" *ngIf="spot?.isBeginner">
+                            <img src="../../assets/icons/low-risk-icon.svg" alt="" style="width: 20px;"
+                                class="ms-2 me-2">
+                            <p>Beginner</p>
                         </div>
                     </div>
+                    <p class="card-text">{{TruncateDescription(spot.description)}}</p>
+                </div>  
+                <div *ngIf="!moderation">
+                    <div class="row mt-5 mb-1  ms-4">
+                        <div class="col-6 d-flex align-middle">
+                            <img src="../../assets/icons/star-grey.svg" alt="" style="width: 20px;" class="ms-2 me-2">
+                            <h6 style="margin-top: 11px;">{{spot.ratesCount}} Rates</h6>
+                        </div>
+                        <div class="col-6 d-flex align-middle">
+                            <img src="../../assets/icons/speech-bubble-grey.svg" alt="" style="width: 20px;"
+                                class="ms-2 me-2">
+                            <h6 style="margin-top: 11px;">{{spot.reviewsCount}} Reviews</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="moderate-buttons mt-4" *ngIf="moderation">
+                    <button type="button" class="btn btn-lg btn-success me-2 shadow-sm"
+                        (click)="openConfirmModal('approve')" *ngIf="!spot.isApproved">Approve</button>
+                    <button class="btn btn-lg btn-warning me-2 shadow-sm" type="button"
+                        (click)="navigateToEdit(spot)">Edit</button>
+                    <button type="button" class="btn btn-lg btn-danger shadow-sm"
+                        (click)="openConfirmModal('delete')">Delete</button>
                 </div>
             </div>
-            </a>
-        
+        </div>
+    </div>
+</button>

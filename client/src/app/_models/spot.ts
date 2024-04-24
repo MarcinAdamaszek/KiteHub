@@ -22,4 +22,5 @@ export interface Spot {
     october: boolean;
     november: boolean;
     december: boolean;
+    isApproved: boolean;
 }

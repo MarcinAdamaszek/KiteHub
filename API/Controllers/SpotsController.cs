@@ -24,9 +24,74 @@ public class SpotsController : BaseApiController
         _userManager = userManager;
     }
 
+    [Authorize(Policy = "RequireAdminRole")]
+    [HttpDelete("{spotId}")]
+    public async Task<ActionResult> DeleteSpot(int spotId)
+    {
+        var spot = await _uow.SpotRepository.GetSpotAsync(spotId);
+
+        if (spot == null) return NotFound();
+
+        _uow.SpotRepository.DeleteSpot(spot);
+
+        if (!await _uow.Complete()) return BadRequest("Failed to delete the spot");
+
+        return NoContent();
+    }
+
+    [Authorize(Policy = "RequireAdminRole")]
+    [HttpPut("approve/{spotId}")]
+    public async Task<ActionResult<Spot>> ApproveSpot(int spotId)
+    {
+        var spot = await _uow.SpotRepository.GetSpotAsync(spotId);
+
+        if (spot == null) return NotFound();
+
+        spot.IsApproved = true;
+
+        if (!await _uow.Complete()) return BadRequest("Failed to approve the spot");
+
+        return Ok(spot);
+    }
+
+    [Authorize(Policy = "RequireAdminRole")]
+    [HttpPut]
+    public async Task<ActionResult<Spot>> UpdateSpot(SpotManipulationDto updateSpotDto)
+    {
+        var spot = await _uow.SpotRepository.GetSpotAsync(updateSpotDto.Id);
+
+        if (spot == null) return NotFound();
+
+        spot.SpotName = updateSpotDto.SpotName;
+        spot.Latitude = updateSpotDto.Latitude;
+        spot.Longitude = updateSpotDto.Longitude;
+        spot.Country = updateSpotDto.Country;
+        spot.Description = updateSpotDto.Description;
+        spot.IsBeginner = updateSpotDto.IsBeginner;
+        spot.IsAdvanced = updateSpotDto.IsAdvanced;
+        spot.January = updateSpotDto.January;
+        spot.February = updateSpotDto.February;
+        spot.March = updateSpotDto.March;
+        spot.April = updateSpotDto.April;
+        spot.May = updateSpotDto.May;
+        spot.June = updateSpotDto.June;
+        spot.July = updateSpotDto.July;
+        spot.August = updateSpotDto.August;
+        spot.September = updateSpotDto.September;
+        spot.October = updateSpotDto.October;
+        spot.November = updateSpotDto.November;
+        spot.December = updateSpotDto.December;
+
+        if (!_uow.HasChanges()) return BadRequest("You cannot update the spot without changing any data");
+
+        if (!await _uow.Complete()) return BadRequest("Failed to update the spot");
+
+        return Ok(spot);
+    }
+
     [Authorize]
     [HttpPost]
-    public async Task<ActionResult<SpotDto>> AddSpot(AddSpotDto addSpotDto)
+    public async Task<ActionResult<SpotDto>> AddSpot(SpotManipulationDto addSpotDto)
     {
         var user = await _userManager.GetUserAsync(User);
 
@@ -34,36 +99,12 @@ public class SpotsController : BaseApiController
 
         if (country == null) return BadRequest("Invalid country name");
 
-        var spot = new Spot 
-        {
-            SpotName = addSpotDto.SpotName,
-            Country = addSpotDto.Country,
-            Continent = country.Continent,
-            Description = addSpotDto.Description,
-            CreatorId = user.Id,
-            CreatorName = user.UserName,
-            Creator = user,
-            Rates = new List<Rate>(),
-            Reviews = new List<Review>(),
-            Rating = 0,
-            RatesCount = 0,
-            ReviewsCount = 0,
-            DateCreated = DateTime.UtcNow,
-            IsBeginner = addSpotDto.IsBeginner,
-            IsAdvanced = addSpotDto.IsAdvanced,
-            January = addSpotDto.January,
-            February = addSpotDto.February,
-            March = addSpotDto.March,
-            April = addSpotDto.April,
-            May = addSpotDto.May,
-            June = addSpotDto.June,
-            July = addSpotDto.July,
-            August = addSpotDto.August,
-            September = addSpotDto.September,
-            October = addSpotDto.October,
-            November = addSpotDto.November,
-            December = addSpotDto.December,
-        };
+        var spot = _mapper.Map<Spot>(addSpotDto);
+        spot.CreatorId = user.Id;
+        spot.CreatorName = user.UserName;
+        spot.Creator = user;
+        spot.DateCreated = DateTime.UtcNow;
+        spot.Continent = country.Continent;
 
         _uow.SpotRepository.AddSpot(spot);
 
@@ -73,17 +114,10 @@ public class SpotsController : BaseApiController
 
     }
 
-    [HttpGet]
-    public async Task<ActionResult<PagedList<SpotDto>>> GetSpots([FromQuery]SpotParams spotParams)
+    [HttpGet("approved")]
+    public async Task<ActionResult<PagedList<SpotDto>>> GetApprovedSpots([FromQuery]SpotParams spotParams)
     {
-        var months = new string[] {"january", "february", "march", "april", "may", 
-            "june", "july", "august", "september", "october", "november", "december"};
-        
-        if (spotParams.SelectedMonth != "none" && 
-            !months.Contains(spotParams.SelectedMonth))
-        {
-            return BadRequest("Incorrect month name");
-        }
+        if (!spotParams.IsMonthCorrect()) return BadRequest("Incorrect month name");
 
         var spots = await _uow.SpotRepository.GetSpotsAsync(spotParams);
 
@@ -92,6 +126,22 @@ public class SpotsController : BaseApiController
 
         return Ok(spots);
     }
+
+    [Authorize(Policy = "RequireAdminRole")]
+    [HttpGet]
+    public async Task<ActionResult<PagedList<SpotDto>>> GetSpots([FromQuery]SpotParams spotParams)
+    {
+
+        if (!spotParams.IsMonthCorrect()) return BadRequest("Incorrect month name");
+
+        var spots = await _uow.SpotRepository.GetSpotsAsync(spotParams, false);
+
+        Response.AddPaginationHeader(new PaginationHeader(spots.CurrentPage, spots.PageSize, 
+        spots.TotalCount, spots.TotalPages));
+
+        return Ok(spots);
+    }
+
 
     [HttpGet("{spotId}")]
     public async Task<ActionResult<SpotDetailsDto>> GetSpotDetails(int spotId)

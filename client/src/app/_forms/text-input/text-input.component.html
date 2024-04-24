@@ -18,4 +18,7 @@
     <div class="invalid-feedback" *ngIf="control.errors?.['notMatching']">
         Passwords do not match
     </div>
+    <div class="invalid-feedback" *ngIf="control.errors?.['pattern']">
+        Incorrect format. Please enter a valid decimal value like "99.9999999" with maximum of 7 digits after the decimal point.
+    </div>
 </div>

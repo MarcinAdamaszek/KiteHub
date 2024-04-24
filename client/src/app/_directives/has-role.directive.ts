@@ -8,9 +8,9 @@ import { take } from 'rxjs';
 })
 export class HasRoleDirective implements OnInit {
   @Input() appHasRole: string[] = [];
-  user: User = {} as User;
+  user: User | null = null;
 
-  constructor(private viewContainterRef: ViewContainerRef, 
+  constructor(private viewContainerRef: ViewContainerRef, 
     private templateRef: TemplateRef<any>, private accountService: AccountService)  { 
       accountService.currentUser$.pipe(take(1)).subscribe({
         next: user => {
@@ -20,11 +20,22 @@ export class HasRoleDirective implements OnInit {
     }
 
   ngOnInit(): void {
-    if (this.user.roles.some(r => this.appHasRole.includes(r))) {
-      this.viewContainterRef.createEmbeddedView(this.templateRef);
-    }
-    else {
-      this.viewContainterRef.clear();
+    this.accountService.currentUser$.subscribe(user => {
+      if (user) {
+        this.user = user;
+        this.updateView();
+      } else {
+        this.user = null;
+        this.updateView();
+      }
+    });
+  }
+
+  private updateView(): void {
+    if (this.user && this.user.roles.some(r => this.appHasRole.includes(r))) {
+      this.viewContainerRef.createEmbeddedView(this.templateRef);
+    } else {
+      this.viewContainerRef.clear();
     }
   }
 

@@ -206,6 +206,9 @@ namespace API.data.migrations
                     b.Property<DateTime>("DatePosted")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
                     b.Property<int>("SpotReviewedId")
                         .HasColumnType("int");
 
@@ -257,6 +260,9 @@ namespace API.data.migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsAdvanced")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsBeginner")

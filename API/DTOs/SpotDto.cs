@@ -26,4 +26,5 @@ public class SpotDto
     public bool October { get; set; }
     public bool November { get; set; }
     public bool December { get; set; }
+    public bool IsApproved { get; set; }
 }

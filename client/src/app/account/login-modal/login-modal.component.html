@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h4 class="modal-title">Sign in to KiteHub</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && login()" autocomplete="off">
+        <app-text-input [formControl]="$any(loginForm.controls['username'])" [label]="'username'">
+        </app-text-input>
+        <app-text-input [formControl]="$any(loginForm.controls['password'])" [label]="'password'"
+            [type]="'password'"></app-text-input>
+        <div class="row" *ngIf="validationErrors">
+            <ul class="text-danger">
+                <li *ngFor="let error of validationErrors">
+                    {{error}}
+                </li>
+            </ul>
+        </div>
+        <div class="text-center mt-4 mb-2">
+            <button [disabled]="!loginForm.valid" class="btn btn-lg btn-warning me-2 shadow-sm" type="submit">Log in</button>
+            <button type="button" class="btn btn-lg btn-secondary shadow-sm" (click)="bsModalRef.hide()">Cancel</button>
+        </div>
+    </form>
+</div>

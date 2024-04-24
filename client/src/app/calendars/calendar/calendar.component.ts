@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-calendar',
@@ -6,50 +6,31 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./calendar.component.scss']
 })
 
-export class CalendarComponent implements OnInit {
+export class CalendarComponent{
   selectedMonth: string = 'none';
-  @Output() newMonthSelected = new EventEmitter<string[]>();
+  @Output() selectionChanged = new EventEmitter<string[]>();
   @Input() multiSelectionOn = false;
-  monthsToggledOn: string[] = [];
-
-  ngOnInit(): void {
-  }
+  @Input() monthsToggledOn: string[] = [];
 
   toggleSelected(month: string) {
-    const index = this.monthsToggledOn.indexOf(month);
-
     
+    const index = this.monthsToggledOn.indexOf(month);
 
     if (index != -1) {
       this.monthsToggledOn.splice(index, 1);
-      this.newMonthSelected.emit(['none']);
+      if (!this.multiSelectionOn) this.monthsToggledOn.push('none');
     }
     else {
       if (!this.multiSelectionOn) this.monthsToggledOn.pop();
       this.monthsToggledOn.push(month);
-      this.newMonthSelected.emit(this.monthsToggledOn);
     }
 
-    // if (this.multiSelectionOn) {
-    //   if (index != -1) {
-    //     this.monthsToggledOn.splice(index, 1);
-    //   }
-    //   else {
-    //     this.monthsToggledOn.push(month);
-    //   }
-    // }
-    // else {
-    //   if (index != -1) {
-    //     this.monthsToggledOn.pop();
-    //     this.newMonthSelected.emit('none');
-    //   }
-    //   else {
-    //     this.monthsToggledOn.push(month);
-    //     this.newMonthSelected.emit(month);
-    //   }
-    // }
+    this.selectionChanged.emit(this.monthsToggledOn);
+  }
 
-    
+  resetMonthToggle() {
+    this.monthsToggledOn = ['none'];
+    this.selectionChanged.emit(this.monthsToggledOn); 
   }
 
 }

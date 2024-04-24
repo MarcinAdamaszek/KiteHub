@@ -24,4 +24,5 @@ export class AppComponent {
     const user: User = JSON.parse(userString);
     this.accountService.setCurrentUser(user);
   }
+
 }

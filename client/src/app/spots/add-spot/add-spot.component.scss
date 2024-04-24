@@ -2,15 +2,16 @@
 
 .add-spot-page {
     width: 100%;
-    height: 200vh;
+    min-height: 120vh;
     // overflow: hidden;
     // position: relative;
     background-image: url(../../../assets/images/add-spot-background.jpg);
     background-size: 100%;
     background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
+    background-position: center;
+    background-attachment: scroll;
     background-size: cover;
+    box-shadow: inset 0 0 0 1000px rgba(184, 184, 184, 0.5)
 }
 
 .card {
@@ -24,17 +25,13 @@
     height: 50px;
 }
 
-h4 {
+h4, h5, h6, label, button {
     font-family: "Inter";
 }
 
-h5 {
-    font-family: "Inter";
-
-}
-
-label {
-    font-family: "Inter";
+textarea {
+    max-height: 500px;
+    min-height: 200px;
 }
 
 :host ::ng-deep app-calendar .calendar-box{

@@ -1,0 +1,16 @@
+<div class="review-container container-fluid mt-5" style="max-width: 600px; ">
+    <div class="row">
+        <p class="name col-6 text-start fw-bold" style="color:#383838;">{{review.authorName}}</p>
+        <p class="col-6 text-end fst-italic">{{truncateDate(review.datePosted.toLocaleString())}}</p>
+    </div>
+    <div class="row mt-2">
+        <p class="content">{{review.content}}</p>
+    </div>
+    <div class="moderate-buttons mt-2" *ngIf="moderation">
+        <button type="button" class="btn btn-sm btn-success me-2 shadow-sm"
+            (click)="openConfirmModal('approve')">Approve</button>
+        <button type="button" class="btn btn-sm btn-danger shadow-sm"
+            (click)="openConfirmModal('delete')">Delete</button>
+    </div>
+    <hr style="border-top: 2px solid #383838;">
+</div>

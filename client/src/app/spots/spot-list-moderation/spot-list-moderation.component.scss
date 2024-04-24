@@ -1,0 +1,7 @@
+button {
+    font-family: "Inter";
+}
+
+:host ::ng-deep app-spot-card .card:before {
+    display: none;
+}

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
-import { RouterOutlet } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 
@@ -14,19 +14,20 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
   imports: [
     CommonModule,
     BrowserAnimationsModule,
-    RouterOutlet,
+    CollapseModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   exports: [
     BrowserAnimationsModule,
-    MdbCollapseModule,
-    RouterOutlet,
+    CollapseModule,
     ModalModule,
-    PaginationModule
+    PaginationModule,
+    TooltipModule
   ]
 })
 export class SharedModule { }

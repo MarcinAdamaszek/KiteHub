@@ -7,6 +7,7 @@ import { RateModalComponent } from 'src/app/rating/rate-modal/rate-modal.compone
 import { AccountService } from 'src/app/_services/account.service';
 import { ReviewService } from 'src/app/_services/review.service';
 import { ToastrService } from 'ngx-toastr';
+import { FeedbackModalComponent } from 'src/app/feedback/feedback-modal/feedback-modal.component';
 
 @Component({
   selector: 'app-spot-details',
@@ -15,15 +16,18 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SpotDetailsComponent implements OnInit {
   spotDetails: SpotDetails = {} as SpotDetails;
-  bsModalRef: BsModalRef<RateModalComponent> = 
+  rateBsModalRef: BsModalRef<RateModalComponent> = 
     new BsModalRef<RateModalComponent>();
+  feedbackBsModalRef: BsModalRef<FeedbackModalComponent> = 
+    new BsModalRef<FeedbackModalComponent>();
   spotId: number = 1;
   reviewContent = '';
   anyReviews = false;
 
   constructor(private spotService: SpotService, 
     private route: ActivatedRoute, private modalService: BsModalService,
-    public accountService: AccountService, private reviewService: ReviewService) {
+    public accountService: AccountService, private reviewService: ReviewService,
+    private toastr: ToastrService) {
     this.loadSpot();
   }
 
@@ -59,11 +63,15 @@ export class SpotDetailsComponent implements OnInit {
       }
     }
 
-    this.bsModalRef = this.modalService.show(RateModalComponent, config);
+    this.rateBsModalRef = this.modalService.show(RateModalComponent, config);
 
-    this.bsModalRef.onHide?.subscribe({
+    this.rateBsModalRef.onHide?.subscribe({
       next: () => {
-        if (this.bsModalRef.content?.isRateSuccessful) this.loadSpot();
+        if (this.rateBsModalRef.content?.isRateSuccessful) {
+          this.toastr.success('Spot successfully rated!', this.spotDetails.spotName)
+          this.loadSpot();
+          this.spotService.spotApprovedCache.clear();
+        }
       }
     })
   }
@@ -74,6 +82,7 @@ export class SpotDetailsComponent implements OnInit {
         next: () => { 
           this.reviewContent = '';
           this.loadSpot();
+          this.openFeedbackModal();
         },
         error: err => console.log(err)
       })
@@ -82,6 +91,21 @@ export class SpotDetailsComponent implements OnInit {
   openLocation() {
     window.open(`https://maps.google.com/?q=${this.spotDetails.latitude},
     ${this.spotDetails.longitude}&ll=${this.spotDetails.latitude},${this.spotDetails.longitude}&z=3`);
+  }
+
+  openForecast() {
+    window.open(`https://windy.com/${this.spotDetails.latitude}/${this.spotDetails.longitude}`);
+  }
+
+  private openFeedbackModal() {
+    const config = {
+      class: 'modal-sm',
+      initialState: {
+        message: 'Your review has been submitted and is awaiting approval from our team of moderators. Thank you for your contribution!'
+      }
+    };
+
+    this.feedbackBsModalRef = this.modalService.show(FeedbackModalComponent, config);
   }
 
 }

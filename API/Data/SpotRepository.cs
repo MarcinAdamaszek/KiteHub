@@ -19,14 +19,21 @@ public class SpotRepository : ISpotRepository
         _mapper = mapper;
     }
 
+    public void DeleteSpot(Spot spot)
+    {
+        _context.Spots.Remove(spot);
+    }
+    
     public void AddSpot(Spot spot)
     {
         _context.Spots.Add(spot);
     }
     
-    public async Task<PagedList<SpotDto>> GetSpotsAsync(SpotParams spotParams)
+    public async Task<PagedList<SpotDto>> GetSpotsAsync(SpotParams spotParams, bool approvedOnly = true)
     {
         var query = _context.Spots.AsQueryable();
+
+        if (approvedOnly) query = query.Where(s => s.IsApproved == true);
 
         query = FilterByMonth(query, spotParams.SelectedMonth);
 
@@ -39,10 +46,6 @@ public class SpotRepository : ISpotRepository
         return await _context.Spots
             .Where(s => s.Id == spotId)
             .SingleOrDefaultAsync();
-    }
-    public void UpdateSpot(Spot spot)
-    {
-        _context.Entry(spot).State = EntityState.Modified;
     }
 
     private IQueryable<Spot> FilterByMonth(IQueryable<Spot> query, string month)

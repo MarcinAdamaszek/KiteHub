@@ -10,4 +10,5 @@ public class Review
     public AppUser Author { get; set; }
     public int SpotReviewedId { get; set; }
     public Spot SpotReviewed { get; set; }
+    public bool IsApproved { get; set; }
 }
